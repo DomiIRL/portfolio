@@ -54,7 +54,10 @@ export default function GridItem({ title, subtitle = [], buttons, additionalCont
         <>
             {position === 'right' && additionalContent(hovered)}
             <div
-                className={`transform flex items-center justify-${position === 'left' ? 'end' : 'start'} ${hovered ? 'show' : ''}`}
+                className={`transform flex items-center ${hovered ? 'show' : ''}`}
+                style={{
+                    justifyContent : position === 'left' ? 'flex-end' : 'flex-start',
+                }}
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseLeave}
                 onFocus={handleFocus}
