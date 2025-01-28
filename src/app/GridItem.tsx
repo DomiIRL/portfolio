@@ -30,7 +30,7 @@ export default function GridItem({ title, subtitle = [], buttons, additionalCont
 
     const createVerticalLine = () => {
         return (
-            <div className="border-l-2 border-gray-200 mx-4 border-line self-stretch"></div>
+            <div className="border-l-2 border-gray-200 mx-4 show-appear self-stretch"></div>
         )
     }
 
@@ -57,7 +57,7 @@ export default function GridItem({ title, subtitle = [], buttons, additionalCont
     const createButtons = () => {
         return buttons.map((button, idx) => (
             <div key={idx}>
-                <a href={button.href} className="btn underline-hover">{button.text}</a>
+                <a href={button.href} className="btn underline-hover show-appear">{button.text}</a>
             </div>
         ))
     }

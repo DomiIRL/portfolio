@@ -3,6 +3,8 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import GridItem from "./GridItem";
+import Tooltip from "./Tooltip";
+import SkillsIcons from "./SkillsIcons";
 
 const catppuccinMochaColors = [
     "#F5E0DC", "#F2CDCD", "#F5C2E7", "#CBA6F7", "#F38BA8",
@@ -11,6 +13,14 @@ const catppuccinMochaColors = [
     "#BAC2DE", "#A6ADC8", "#9399B2", "#7F849C", "#6C7086",
     "#585B70", "#45475A", "#313244", "#1E1E2E", "#181825",
     "#11111B"
+];
+
+const skills = [
+    { name: 'Java', src: '/icons/java.png' },
+    { name: 'Java', src: '/icons/java.png' },
+    { name: 'Java', src: '/icons/java.png' },
+    { name: 'Java', src: '/icons/java.png' },
+    { name: 'Java', src: '/icons/java.png' },
 ];
 
 export default function Home() {
@@ -57,8 +67,6 @@ export default function Home() {
             document.querySelector(".background")?.appendChild(bubble);
             setBubbleCount(prevCount => prevCount + 1);
 
-            // Trigger reflow to ensure transition starts
-            window.getComputedStyle(bubble).opacity;
             bubble.classList.add("show");
 
             bubble.addEventListener("animationend", () => {
@@ -86,7 +94,7 @@ export default function Home() {
             <div className="background"></div>
             <div className="flex-grow grid grid-rows-[20px_1fr_20px] pb-20 gap-16">
                 <main className="flex flex-col gap-40 row-start-2 items-center">
-                    <div className="w-full text-center">
+                    <div className="w-full text-center flex flex-col justify-center max-w-[50vw]">
                         <div className="gap-3 flex flex-col">
                             <h1 className="text-5xl">Dominik E. Svrt</h1>
                             <p className="text-lg">Also known as <strong>DomiIRL</strong></p>
@@ -116,8 +124,9 @@ export default function Home() {
                                     width={24}
                                     height={24}
                                 />
-                                <span className="underline-hover">Message me</span>
-                            </a>
+                                <a className="underline-hover">Message me</a>
+                            </a
+                              >
                             <a
                                 className="flex items-center gap-2"
                                 href="https://github.com/DomiIRL"
@@ -136,60 +145,66 @@ export default function Home() {
                         </div>
                     </div>
 
-                    <div className="w-full flex flex-col gap-120 px-10 sm:px-20">
-                        <div
-                            className="grid gap-20 items-center max-w-6xl mx-auto"
-                            style={{
-                                gridTemplateColumns: isWideScreen ? "repeat(2, minmax(0, 1fr))" : "1fr",
-                            }}
-                        >
-                            <GridItem
-                                title={["Fullstack", "Developer", "by ❤️"]}
-                                buttons={[
-                                    { text: "Projects", href: "#" },
-                                    { text: "Skills", href: "#" },
-                                ]}
-                                position="left"
-                            />
+                    <div className="w-full flex flex-col items-center">
+                        <div className="px-10 sm:px-20 flex flex-col justify-center max-w-[50vw]">
+                            <div
+                                className="grid gap-20 items-center"
+                                style={{
+                                    gridTemplateColumns: isWideScreen ? "repeat(2, minmax(0, 1fr))" : "1fr",
+                                }}
+                            >
+                                <GridItem
+                                    title={["Fullstack", "Developer", "by ❤️"]}
+                                    buttons={[
+                                        { text: "Projects", href: "#" },
+                                        { text: "Skills", href: "#" },
+                                    ]}
+                                    additionalContent={hovered => <Tooltip text={[
+                                        "Fullstack Developer with a passion for coding.",
+                                        "I mainly code in Java and TypeScript."
+                                    ]} hovered={hovered} />}
+                                    position="left"
+                                />
 
-                            <GridItem
-                                title={["Server", "Admin"]}
-                                buttons={[
-                                    { text: "Projects", href: "#" },
-                                    { text: "Skills", href: "#" },
-                                ]}
-                                position="right"
-                            />
+                                <GridItem
+                                    title={["Server", "Admin"]}
+                                    buttons={[
+                                        { text: "Projects", href: "#" },
+                                        { text: "Skills", href: "#" },
+                                    ]}
+                                    position="right"
+                                />
 
-                            <GridItem
-                                title={["Minecraft", "Developer"]}
-                                subtitle={["Projects: 6+", "Downloads: 17.800.000+"]}
-                                buttons={[
-                                    { text: "Mods", href: "https://www.curseforge.com/members/domiirl/projects" },
-                                    { text: "Plugins", href: "https://www.spigotmc.org/resources/authors/1005207/" },
-                                    { text: "Server Network", href: "https://dc.coding-area.net/" },
-                                ]}
-                                additionalContent={hovered => <div className={`minecraft-container steve ${hovered ? 'show-steve' : ''}`}></div>}
-                                position="left"
-                            />
+                                <GridItem
+                                    title={["Minecraft", "Developer"]}
+                                    subtitle={["Projects: 6+", "Downloads: 17.800.000+"]}
+                                    buttons={[
+                                        { text: "Mods", href: "https://www.curseforge.com/members/domiirl/projects" },
+                                        { text: "Plugins", href: "https://www.spigotmc.org/resources/authors/1005207/" },
+                                        { text: "Server Network", href: "https://dc.coding-area.net/" },
+                                    ]}
+                                    additionalContent={hovered => <div className={`w-full show-appear steve ${hovered ? 'show' : ''}`}></div>}
+                                    position="left"
+                                />
 
-                            <GridItem
-                                title={["3D Print", "Enthusiast"]}
-                                buttons={[
-                                    { text: "Prints", href: "#" },
-                                    { text: "Materials", href: "#" },
-                                ]}
-                                position="right"
-                            />
+                                <GridItem
+                                    title={["3D Print", "Enthusiast"]}
+                                    buttons={[
+                                        { text: "Prints", href: "#" },
+                                        { text: "Materials", href: "#" },
+                                    ]}
+                                    position="right"
+                                />
 
-                            <GridItem
-                                title={["Fitness", "Addict"]}
-                                buttons={[
-                                    { text: "Workouts", href: "#" },
-                                    { text: "Diet", href: "#" },
-                                ]}
-                                position="left"
-                            />
+                                <GridItem
+                                    title={["Fitness", "Addict"]}
+                                    buttons={[
+                                        { text: "Workouts", href: "#" },
+                                        { text: "Diet", href: "#" },
+                                    ]}
+                                    position="left"
+                                />
+                            </div>
                         </div>
                     </div>
                 </main>
