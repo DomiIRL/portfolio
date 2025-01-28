@@ -16,11 +16,24 @@ const catppuccinMochaColors = [
 export default function Home() {
     const [bubbleCount, setBubbleCount] = useState(0);
     const [maxBubbles, setMaxBubbles] = useState(10);
+    const [isWideScreen, setIsWideScreen] = useState(true);
 
     useEffect(() => {
         if (typeof window !== "undefined") {
             setMaxBubbles(window.innerWidth < 1000 ? 5 : 10);
+            setIsWideScreen(window.innerWidth > 1000);
         }
+    }, []);
+
+    useEffect(() => {
+        const handleResize = () => {
+            setIsWideScreen(window.innerWidth > 1000);
+        };
+
+        window.addEventListener("resize", handleResize);
+        handleResize();
+
+        return () => window.removeEventListener("resize", handleResize);
     }, []);
 
     useEffect(() => {
@@ -124,9 +137,12 @@ export default function Home() {
                     </div>
 
                     <div className="w-full flex flex-col gap-120 px-10 sm:px-20">
-                        <div className="grid grid-cols-2 gap-20 items-center max-w-6xl mx-auto">
-
-                            {/* Grid item 1 */}
+                        <div
+                            className="grid gap-20 items-center max-w-6xl mx-auto"
+                            style={{
+                                gridTemplateColumns: isWideScreen ? "repeat(2, minmax(0, 1fr))" : "1fr",
+                            }}
+                        >
                             <GridItem
                                 title={["Fullstack", "Developer", "by ❤️"]}
                                 buttons={[
@@ -136,7 +152,6 @@ export default function Home() {
                                 position="left"
                             />
 
-                            {/* Grid item 2 */}
                             <GridItem
                                 title={["Server", "Admin"]}
                                 buttons={[
@@ -146,7 +161,6 @@ export default function Home() {
                                 position="right"
                             />
 
-                            {/* Grid item 3 */}
                             <GridItem
                                 title={["Minecraft", "Developer"]}
                                 subtitle={["Projects: 6+", "Downloads: 17.800.000+"]}
@@ -159,7 +173,6 @@ export default function Home() {
                                 position="left"
                             />
 
-                            {/* Grid item 4 */}
                             <GridItem
                                 title={["3D Print", "Enthusiast"]}
                                 buttons={[

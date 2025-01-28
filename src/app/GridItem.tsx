@@ -1,4 +1,4 @@
-import { useState } from "react";
+import {useEffect, useState} from "react";
 
 interface GridItemProps {
     title: string[];
@@ -10,6 +10,18 @@ interface GridItemProps {
 
 export default function GridItem({ title, subtitle = [], buttons, additionalContent = () => <div />, position }: GridItemProps) {
     const [hovered, setHovered] = useState<boolean>(false);
+    const [isWideScreen, setIsWideScreen] = useState<boolean>(false);
+
+    useEffect(() => {
+        const handleResize = () => {
+            setIsWideScreen(window.innerWidth > 1000);
+        };
+
+        window.addEventListener("resize", handleResize);
+        handleResize();
+
+        return () => window.removeEventListener("resize", handleResize);
+    }, []);
 
     const handleMouseEnter = () => setHovered(true);
     const handleMouseLeave = () => setHovered(false);
@@ -25,7 +37,7 @@ export default function GridItem({ title, subtitle = [], buttons, additionalCont
     const createTitle = () => {
         return title.map((text, idx) => (
             <h2 key={idx}
-                className={'text-responsive'}
+                className={'text-title'}
                 style={{
                     marginRight: position === 'left' ? `${(title.length - idx - 1) * 0.5}em` : '0',
                     marginLeft: position === 'right' ? `${idx * 0.5}em` : '0',
@@ -52,11 +64,13 @@ export default function GridItem({ title, subtitle = [], buttons, additionalCont
 
     return (
         <>
-            {position === 'right' && additionalContent(hovered)}
+            {isWideScreen && position === 'right' && additionalContent(hovered)}
             <div
                 className={`transform flex items-center ${hovered ? 'show' : ''}`}
                 style={{
                     justifyContent : position === 'left' ? 'flex-end' : 'flex-start',
+                    paddingLeft: !isWideScreen && position === 'right' ? '10em' : '0',
+                    paddingRight: !isWideScreen && position === 'left' ? '10em' : '0',
                 }}
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseLeave}
@@ -86,7 +100,7 @@ export default function GridItem({ title, subtitle = [], buttons, additionalCont
                     </>
                 )}
             </div>
-            {position === 'left' && additionalContent(hovered)}
+            {isWideScreen && position === 'left' && additionalContent(hovered)}
         </>
     );
 }
