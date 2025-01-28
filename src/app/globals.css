@@ -116,3 +116,15 @@ body {
     transform: translateY(0);
   }
 }
+
+.text-responsive {
+  font-size: clamp(0.5rem, 5vw, 10rem); /* Adjusts between 4rem and 7rem based on viewport width */
+}
+
+.text-subtitle {
+  font-size: clamp(0.3rem, 1.5vw, 2rem); /* Adjusts between 1rem and 2rem based on viewport width */
+}
+
+.btn {
+  font-size: clamp(0.7rem, 1.5vw, 1.5rem); /* Adjusts font size based on viewport width */
+}

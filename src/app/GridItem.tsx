@@ -25,7 +25,7 @@ export default function GridItem({ title, subtitle = [], buttons, additionalCont
     const createTitle = () => {
         return title.map((text, idx) => (
             <h2 key={idx}
-                className={'text-9xl'}
+                className={'text-responsive'}
                 style={{
                     marginRight: position === 'left' ? `${(title.length - idx - 1) * 0.5}em` : '0',
                     marginLeft: position === 'right' ? `${idx * 0.5}em` : '0',
@@ -38,7 +38,7 @@ export default function GridItem({ title, subtitle = [], buttons, additionalCont
 
     const createSubtitle = () => {
         return subtitle.map((text, idx) => (
-            <p key={idx} className="text-2xl mt-2 text-center">{text}</p>
+            <p key={idx} className="text-subtitle mt-2 text-center">{text}</p>
         ))
     }
 
