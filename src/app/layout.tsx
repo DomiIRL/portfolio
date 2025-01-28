@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type {Metadata, Viewport} from "next";
 import { JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
@@ -13,6 +13,10 @@ export const metadata: Metadata = {
     title: "Dominik Svrt",
     description: "Personal Portfolio",
 };
+
+export const viewport: Viewport = {
+    colorScheme: "dark",
+}
 
 // Define the RootLayout component
 export default function RootLayout({
