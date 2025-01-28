@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import GridItem from "./GridItem";
 import Tooltip from "./Tooltip";
-import SkillsIcons from "./SkillsIcons";
 
 const catppuccinMochaColors = [
     "#F5E0DC", "#F2CDCD", "#F5C2E7", "#CBA6F7", "#F38BA8",
@@ -13,14 +12,6 @@ const catppuccinMochaColors = [
     "#BAC2DE", "#A6ADC8", "#9399B2", "#7F849C", "#6C7086",
     "#585B70", "#45475A", "#313244", "#1E1E2E", "#181825",
     "#11111B"
-];
-
-const skills = [
-    { name: 'Java', src: '/icons/java.png' },
-    { name: 'Java', src: '/icons/java.png' },
-    { name: 'Java', src: '/icons/java.png' },
-    { name: 'Java', src: '/icons/java.png' },
-    { name: 'Java', src: '/icons/java.png' },
 ];
 
 export default function Home() {
