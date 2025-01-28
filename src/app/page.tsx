@@ -23,22 +23,6 @@ export default function Home() {
         }
     }, []);
 
-    const handleMouseEnter = (index: number) => {
-        setHovered(index);
-    };
-
-    const handleMouseLeave = () => {
-        setHovered(null);
-    };
-
-    const handleFocus = (index: number) => {
-        setHovered(index);
-    };
-
-    const handleBlur = () => {
-        setHovered(null);
-    };
-
     useEffect(() => {
         const createBubble = (initial = false) => {
             if (bubbleCount >= maxBubbles) return;
