@@ -55,20 +55,15 @@ export default function Home() {
                 bubble.style.bottom = `${Math.random() * 25}%`;
             }
 
-            const backgroundElement = document.querySelector(".background");
-            if (backgroundElement) {
-                backgroundElement.appendChild(bubble);
-                setBubbleCount(prevCount => prevCount + 1);
+            document.querySelector(".background")?.appendChild(bubble);
+            setBubbleCount(prevCount => prevCount + 1);
 
-                bubble.classList.add("show");
+            bubble.classList.add("show");
 
-                bubble.addEventListener("animationend", () => {
-                    bubble.remove();
-                    setBubbleCount(prevCount => prevCount - 1);
-                });
-            } else {
-                console.error("Background element not found");
-            }
+            bubble.addEventListener("animationend", () => {
+                bubble.remove();
+                setBubbleCount(prevCount => prevCount - 1);
+            });
         };
 
         const initialBubbles = window.innerWidth < 1000 ? 5 : 7;
@@ -122,7 +117,7 @@ export default function Home() {
                                 />
                                 <a className="underline-hover">Message me</a>
                             </a
-                            >
+                              >
                             <a
                                 className="flex items-center gap-2"
                                 href="https://github.com/DomiIRL"
